@@ -321,7 +321,7 @@ string JSMessageType(const Descriptor *desc, const FileDescriptor *file) {
   if (desc->file() != file) {
     result = ModuleAlias(desc->file()->name());
   }
-  result += StripPrefixString(desc->full_name(), desc->file()->package());
+  result += "." + StripPrefixString(desc->full_name(), desc->file()->package());
   if (!result.empty() && result[0] == '.') {
     result = result.substr(1);
   }
@@ -366,7 +366,7 @@ string JSElementType(const FieldDescriptor *desc, const FileDescriptor *file)
     if (desc->enum_type()->file() != file) {
       js_field_type = ModuleAlias(desc->enum_type()->file()->name());
     }
-    js_field_type += StripPrefixString(desc->enum_type()->full_name(),
+    js_field_type += "." + StripPrefixString(desc->enum_type()->full_name(),
                                        desc->enum_type()->file()->package());
     if (!js_field_type.empty() && js_field_type[0] == '.') {
       js_field_type = js_field_type.substr(1);
